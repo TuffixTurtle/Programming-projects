@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAXWORDS 25
+#define IN 1
+#define OUT 0
+
+
+void inputhistogram (int *hist, int n);
+
+int main()
+{
+
+int w, a, b, word, length, state, words[MAXWORDS];
+ w = a  = b = word = length = 0;
+ state = OUT;
+
+
+     for (a = 0; a < MAXWORDS; ++a)
+         words[a] = 0;
+
+
+     while ((w = getchar()) != EOF) {
+
+         if (w == ' ' || w == '\t' || w == '\n') {
+             if (state == IN) {
+
+                 if (length < MAXWORDS)
+                     b = length;
+                 else
+                     b = MAXWORDS;
+                 ++words[b - 1];
+
+
+                 if (words[b-1] > word)
+                     word = words[b-1];
+             }
+
+             length = 0;
+             state = OUT;
+
+         } else {
+
+             ++length;
+             state = IN;
+         }
+     }
+
+
+/*Horizontal*/
+
+/*for (a = 1; a <= word; ++a)
+   {
+    printf("%3d: ",a);
+    for (b = 0; b < words[a]; b++)
+       putchar('*');
+   putchar('\n');
+   }
+
+   return 0;*/
+/*vertical*/
+
+  /for( a = MAXWORDS; a >= 1; --a)
+  {
+    for(b =0;b <= state;++b)
+    {
+      if( a <= words[b])
+        putchar('*');
+      else
+        putchar(' ');
+    }
+  putchar('\n');
+  }
+
+return 0;
+
+}
